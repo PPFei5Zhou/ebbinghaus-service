@@ -1,0 +1,7 @@
+package com.easy.ebbinghaus_service.repository;
+
+import com.easy.ebbinghaus_service.model.entity.Library;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LibraryRepository extends JpaRepository<Library, String> {
+}
