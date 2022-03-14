@@ -1,4 +1,4 @@
-package com.easy.ebbinghaus_service;
+package com.easy.ebbinghausservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

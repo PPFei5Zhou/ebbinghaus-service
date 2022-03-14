@@ -2,6 +2,7 @@ import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     java
+    checkstyle
     id("org.springframework.boot") version "2.6.4"
 }
 
@@ -35,7 +36,13 @@ java {
     }
 }
 
+checkstyle {
+    maxWarnings = 0
+    toolVersion = "10.0"
+}
+
 tasks {
+
     test {
         useJUnitPlatform()
     }

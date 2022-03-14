@@ -1,4 +1,4 @@
-package com.easy.ebbinghaus_service.core;
+package com.easy.ebbinghausservice.core;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -12,17 +12,17 @@ import javax.sql.DataSource;
 public class DatabaseTestConfiguration {
 
     @Bean(initMethod = "start", destroyMethod = "stop")
-    public MySQLContainer<?> mySQLContainer() {
+    public MySQLContainer<?> mySqlContainer() {
         return new MySQLContainer<>("mysql:8.0.28-debian").waitingFor(Wait.forListeningPort());
     }
 
     @Bean
     @FlywayDataSource
-    public DataSource dataSource(MySQLContainer<?> mySQLContainer) {
+    public DataSource dataSource(MySQLContainer<?> mySqlContainer) {
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(mySQLContainer.getJdbcUrl());
-        hikariConfig.setUsername(mySQLContainer.getUsername());
-        hikariConfig.setPassword(mySQLContainer.getPassword());
+        hikariConfig.setJdbcUrl(mySqlContainer.getJdbcUrl());
+        hikariConfig.setUsername(mySqlContainer.getUsername());
+        hikariConfig.setPassword(mySqlContainer.getPassword());
         return new HikariDataSource(hikariConfig);
     }
 }

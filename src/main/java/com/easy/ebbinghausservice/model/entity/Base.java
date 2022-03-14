@@ -1,4 +1,4 @@
-package com.easy.ebbinghaus_service.model.entity;
+package com.easy.ebbinghausservice.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.GenericGenerator;

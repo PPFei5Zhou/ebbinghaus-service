@@ -1,14 +1,16 @@
-package com.easy.ebbinghaus_service.repository;
+package com.easy.ebbinghausservice.repository;
 
-import com.easy.ebbinghaus_service.core.JpaRepositoryTest;
-import com.easy.ebbinghaus_service.model.entity.Library;
+import com.easy.ebbinghausservice.core.JpaRepositoryTest;
+import com.easy.ebbinghausservice.model.entity.Library;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.equalTo;
 
 @JpaRepositoryTest
 class LibraryRepositoryTest {
