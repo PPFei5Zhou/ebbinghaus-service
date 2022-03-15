@@ -42,14 +42,6 @@ checkstyle {
     toolVersion = "10.0"
 }
 
-tasks.withType(JavaCompile::class.java) {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType(Javadoc::class.java) {
-    options.encoding = "UTF-8"
-}
-
 tasks {
     test {
         useJUnitPlatform()
