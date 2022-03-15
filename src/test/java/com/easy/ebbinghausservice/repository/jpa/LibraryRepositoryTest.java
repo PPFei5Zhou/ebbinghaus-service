@@ -1,4 +1,4 @@
-package com.easy.ebbinghausservice.repository;
+package com.easy.ebbinghausservice.repository.jpa;
 
 import com.easy.ebbinghausservice.core.JpaRepositoryTest;
 import com.easy.ebbinghausservice.model.entity.Library;
@@ -16,13 +16,13 @@ import static org.hamcrest.Matchers.equalTo;
 class LibraryRepositoryTest {
 
     @Autowired
-    private LibraryRepository libraryRepository;
+    private LibraryRepository repository;
 
     @Test
     void repository_should_save_library() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        Library library = new Library("test library name", "", "", 1, now, now);
-        Library savedLibrary = libraryRepository.save(library);
+        Library library = new Library("test library name", "", "", now, now);
+        Library savedLibrary = repository.saveAndFlush(library);
         assertThat(savedLibrary.getId(), is(notNullValue()));
         assertThat(savedLibrary.getLibraryName(), equalTo(library.getLibraryName()));
     }

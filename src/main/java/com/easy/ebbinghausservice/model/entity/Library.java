@@ -1,9 +1,12 @@
 package com.easy.ebbinghausservice.model.entity;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.Entity;
 import java.sql.Timestamp;
 
 @Entity
+@Proxy(lazy = false)
 public class Library extends Base {
     private String libraryName;
     private String libraryParentId;
@@ -14,8 +17,15 @@ public class Library extends Base {
     }
 
     public Library(String libraryName, String libraryParentId, String libraryOwnerId,
-                   int dataStatus, Timestamp createDate, Timestamp updateDate) {
-        super(dataStatus, createDate, updateDate);
+                   Timestamp createDate, Timestamp updateDate) {
+        super(createDate, updateDate);
+        this.libraryName = libraryName;
+        this.libraryParentId = libraryParentId;
+        this.libraryOwnerId = libraryOwnerId;
+    }
+
+    public Library(String id, String libraryName, String libraryParentId, String libraryOwnerId) {
+        super(id);
         this.libraryName = libraryName;
         this.libraryParentId = libraryParentId;
         this.libraryOwnerId = libraryOwnerId;
@@ -44,4 +54,5 @@ public class Library extends Base {
     public void setLibraryOwnerId(String libraryOwnerId) {
         this.libraryOwnerId = libraryOwnerId;
     }
+
 }

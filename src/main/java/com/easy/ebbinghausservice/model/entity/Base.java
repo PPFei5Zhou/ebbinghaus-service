@@ -15,8 +15,6 @@ public class Base {
     @GeneratedValue(generator = "idGenerator")
     private String id;
 
-    private int dataStatus;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp createDate;
 
@@ -26,8 +24,11 @@ public class Base {
     public Base() {
     }
 
-    public Base(int dataStatus, Timestamp createDate, Timestamp updateDate) {
-        this.dataStatus = dataStatus;
+    public Base(String id) {
+        this.id = id;
+    }
+
+    public Base(Timestamp createDate, Timestamp updateDate) {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
@@ -38,14 +39,6 @@ public class Base {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public int getDataStatus() {
-        return dataStatus;
-    }
-
-    public void setDataStatus(int dataStatus) {
-        this.dataStatus = dataStatus;
     }
 
     public Timestamp getCreateDate() {

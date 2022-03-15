@@ -21,6 +21,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("mysql:mysql-connector-java")
     implementation("org.flywaydb:flyway-core")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 
     testImplementation(platform("org.junit:junit-bom:5.8.2")) // 在此修改junit版本
     testImplementation("org.junit.jupiter:junit-jupiter-api")
@@ -41,8 +42,15 @@ checkstyle {
     toolVersion = "10.0"
 }
 
-tasks {
+tasks.withType(JavaCompile::class.java) {
+    options.encoding = "UTF-8"
+}
 
+tasks.withType(Javadoc::class.java) {
+    options.encoding = "UTF-8"
+}
+
+tasks {
     test {
         useJUnitPlatform()
     }
