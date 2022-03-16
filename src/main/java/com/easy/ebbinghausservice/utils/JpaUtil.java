@@ -12,6 +12,12 @@ import java.util.stream.Stream;
  * @author Easy
  */
 public class JpaUtil {
+    /**
+     * Copy not null value from src to targe.
+     *
+     * @param src source
+     * @param target target
+     */
     public static void copyNotNullProperties(Object src, Object target) {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     }

@@ -33,6 +33,12 @@ public class Base {
         this.id = id;
     }
 
+    public Base(String id, Timestamp createDate, Timestamp updateDate) {
+        this.id = id;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
     public Base(Timestamp createDate, Timestamp updateDate) {
         this.createDate = createDate;
         this.updateDate = updateDate;

@@ -28,6 +28,14 @@ public class LibraryCard extends Base {
         this.libraryId = libraryId;
     }
 
+    public LibraryCard(String id, String cardTitle, String cardSubtitle, String cardContent, String libraryId, Timestamp createDate, Timestamp updateDate) {
+        super(id, createDate, updateDate);
+        this.cardTitle = cardTitle;
+        this.cardSubtitle = cardSubtitle;
+        this.cardContent = cardContent;
+        this.libraryId = libraryId;
+    }
+
     public String getCardTitle() {
         return cardTitle;
     }
