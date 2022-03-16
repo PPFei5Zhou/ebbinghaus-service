@@ -5,7 +5,6 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,16 +15,8 @@ import java.util.List;
 public class LibrarySpecs {
     public static Specification<Library> selectEntities(Library criteria) {
         return (root, query, builder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            if (Strings.isNotBlank(criteria.getId())) {
-                predicates.add(builder.equal(root.get("id"), criteria.getId()));
-            }
-            if (criteria.getCreateDate() != null) {
-                predicates.add(builder.equal(root.get("createDate"), criteria.getCreateDate()));
-            }
-            if (criteria.getUpdateDate() != null) {
-                predicates.add(builder.equal(root.get("updateDate"), criteria.getUpdateDate()));
-            }
+            BaseSpecs<Library> baseSpecs = new BaseSpecs<>();
+            List<Predicate> predicates = baseSpecs.basePredicates(root, builder, criteria);
             if (Strings.isNotBlank(criteria.getLibraryName())) {
                 predicates.add(builder.equal(root.get("libraryName"), criteria.getLibraryName()));
             }
