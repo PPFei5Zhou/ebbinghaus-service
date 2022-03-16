@@ -1,8 +1,10 @@
 package com.easy.ebbinghausservice.controller;
 
 import com.easy.ebbinghausservice.model.request.LibraryRequestBody;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,6 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class LibraryControllerTest {
 
     @Autowired

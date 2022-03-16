@@ -42,6 +42,7 @@ public abstract class BaseService<B extends Base, J extends JpaRepository<B, Str
             throw new RuntimeException();
         }
         jpa.deleteById(id);
+        jpa.flush();
     }
 
     @Override
@@ -50,6 +51,7 @@ public abstract class BaseService<B extends Base, J extends JpaRepository<B, Str
             throw new NullPointerException();
         }
         jpa.deleteAllByIdInBatch(Arrays.asList(ids));
+        jpa.flush();
     }
 
     @Override
