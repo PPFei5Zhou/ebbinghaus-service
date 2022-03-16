@@ -6,6 +6,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.sql.Timestamp;
 
+/**
+ * Base request body model.
+ *
+ * @author Easy
+ */
 public class BaseRequestBody {
     private String id;
 
@@ -19,9 +24,13 @@ public class BaseRequestBody {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
 
-        if (!(o instanceof BaseRequestBody)) return false;
+        if (!(o instanceof BaseRequestBody)) {
+            return false;
+        }
 
         BaseRequestBody that = (BaseRequestBody) o;
 

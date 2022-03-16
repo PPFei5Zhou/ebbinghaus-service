@@ -8,6 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.sql.Timestamp;
 
+/**
+ * Base jpa entity.
+ *
+ * @author Easy
+ */
 @MappedSuperclass
 public class Base {
     @Id

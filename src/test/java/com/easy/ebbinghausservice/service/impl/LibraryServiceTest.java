@@ -2,7 +2,7 @@ package com.easy.ebbinghausservice.service.impl;
 
 import com.easy.ebbinghausservice.core.DatabaseTestConfiguration;
 import com.easy.ebbinghausservice.model.entity.Library;
-import com.easy.ebbinghausservice.service.InterfaceLibraryService;
+import com.easy.ebbinghausservice.service.LibraryService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 class LibraryServiceTest {
 
     @Resource
-    private InterfaceLibraryService libraryService;
+    private LibraryService libraryService;
 
     private final String id = "026a0e3c-dc45-444e-9ffd-424cb6fe48a5";
 

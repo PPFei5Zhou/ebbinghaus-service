@@ -3,6 +3,11 @@ package com.easy.ebbinghausservice.model.entity;
 import javax.persistence.Entity;
 import java.sql.Timestamp;
 
+/**
+ * Library card jpa entity.
+ *
+ * @author Easy
+ */
 @Entity
 public class LibraryCard extends Base {
     private String cardTitle;

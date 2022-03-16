@@ -2,7 +2,7 @@ package com.easy.ebbinghausservice.controller;
 
 import com.easy.ebbinghausservice.model.entity.Library;
 import com.easy.ebbinghausservice.model.request.LibraryRequestBody;
-import com.easy.ebbinghausservice.service.InterfaceLibraryService;
+import com.easy.ebbinghausservice.service.LibraryService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * Library Controller.
+ *
+ * @author Easy
+ */
 @RestController
 @RequestMapping("library")
 public class LibraryController {
     @Resource
-    public InterfaceLibraryService service;
+    public LibraryService service;
 
     /** 新增实体. */
     @PostMapping()

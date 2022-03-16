@@ -5,6 +5,11 @@ import org.hibernate.annotations.Proxy;
 import javax.persistence.Entity;
 import java.sql.Timestamp;
 
+/**
+ * Library jpa entity.
+ *
+ * @author Easy
+ */
 @Entity
 @Proxy(lazy = false)
 public class Library extends Base {

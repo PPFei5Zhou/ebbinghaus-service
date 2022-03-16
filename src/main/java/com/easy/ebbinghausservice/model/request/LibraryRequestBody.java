@@ -4,6 +4,11 @@ import com.easy.ebbinghausservice.model.entity.Library;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+/**
+ * Library request body model.
+ *
+ * @author Easy
+ */
 public class LibraryRequestBody extends BaseRequestBody {
     private String libraryName;
     private String libraryParentId;
@@ -18,9 +23,13 @@ public class LibraryRequestBody extends BaseRequestBody {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
 
-        if (!(o instanceof LibraryRequestBody)) return false;
+        if (!(o instanceof LibraryRequestBody)) {
+            return false;
+        }
 
         LibraryRequestBody that = (LibraryRequestBody) o;
 

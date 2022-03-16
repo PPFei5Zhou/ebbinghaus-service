@@ -6,6 +6,11 @@ import org.springframework.beans.BeanWrapperImpl;
 import java.beans.PropertyDescriptor;
 import java.util.stream.Stream;
 
+/**
+ * JpaUtil.
+ *
+ * @author Easy
+ */
 public class JpaUtil {
     public static void copyNotNullProperties(Object src, Object target) {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));

@@ -1,7 +1,7 @@
 package com.easy.ebbinghausservice.service.impl;
 
 import com.easy.ebbinghausservice.model.entity.Base;
-import com.easy.ebbinghausservice.service.InterfaceService;
+import com.easy.ebbinghausservice.service.BaseService;
 import com.easy.ebbinghausservice.utils.JpaUtil;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Arrays;
 import java.util.Optional;
 
-public abstract class BaseService<B extends Base, J extends JpaRepository<B, String>> implements InterfaceService<B> {
+/**
+ * Abstract service implements BaseService.
+ *
+ * @author Easy
+ */
+public abstract class AbstractService<B extends Base, J extends JpaRepository<B, String>> implements BaseService<B> {
     @Autowired
     @SuppressWarnings("all")
     public J jpa;

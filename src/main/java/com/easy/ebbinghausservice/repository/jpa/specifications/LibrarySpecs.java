@@ -8,6 +8,11 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Library dynamic select condition.
+ *
+ * @author Easy
+ */
 public class LibrarySpecs {
     public static Specification<Library> selectEntities(Library criteria) {
         return (root, query, builder) -> {
