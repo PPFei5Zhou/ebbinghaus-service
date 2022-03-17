@@ -1,16 +1,21 @@
 package com.easy.ebbinghausservice.controller;
 
-import com.easy.ebbinghausservice.model.request.LibraryRequestBody;
+import com.easy.ebbinghausservice.model.entity.Library;
+import com.easy.ebbinghausservice.service.LibraryService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -21,7 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(value = LibraryController.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class LibraryControllerTest {
 
@@ -29,12 +34,12 @@ class LibraryControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private LibraryController libraryController;
+    private LibraryService service;
 
     @Order(1)
     @Test
     void should_return_ok_when_insert_library() throws Exception {
-        given(libraryController.insertEntity(any())).willReturn(ResponseEntity.ok().build());
+        given(service.insertEntity(any())).willReturn(any(Library.class));
         byte[] requestBody = new ClassPathResource("/request/library/insert_entity.json").getInputStream().readAllBytes();
         mockMvc.perform(post("/library")
                 .contentType(APPLICATION_JSON)
@@ -45,7 +50,7 @@ class LibraryControllerTest {
     @Order(2)
     @Test
     void should_return_ok_when_update_library() throws Exception {
-        given(libraryController.insertEntity(any())).willReturn(ResponseEntity.ok().build());
+        given(service.insertEntity(any())).willReturn(any(Library.class));
         byte[] requestBody = new ClassPathResource("/request/library/update_entity.json").getInputStream().readAllBytes();
         mockMvc.perform(put("/library/2219df67-01bf-4b52-81aa-17115b1df1f7")
                 .contentType(APPLICATION_JSON)
@@ -56,14 +61,14 @@ class LibraryControllerTest {
     @Order(3)
     @Test
     void should_return_ok_when_delete_one_library() throws Exception {
-        given(libraryController.removeEntity(any())).willReturn(ResponseEntity.ok().build());
+        Mockito.doNothing().when(service).removeEntity(any(String.class));
         mockMvc.perform(delete("/library/D965F9e6-76F5-CAc8-83BD-4F429E4CC91c")).andExpect(status().isOk());
     }
 
     @Order(4)
     @Test
     void should_return_ok_when_delete_library() throws Exception {
-        given(libraryController.removeEntities(any())).willReturn(ResponseEntity.ok().build());
+        Mockito.doNothing().when(service).removeEntity(any(String[].class));
         byte[] requestBody = new ClassPathResource("/request/library/remove_entities.json").getInputStream().readAllBytes();
         mockMvc.perform(delete("/library")
                 .contentType(APPLICATION_JSON)
@@ -74,7 +79,7 @@ class LibraryControllerTest {
     @Order(5)
     @Test
     void should_return_ok_when_select_one_library() throws Exception {
-        given(libraryController.selectEntity(any())).willReturn(ResponseEntity.ok().build());
+        given(service.selectEntityById(any(String.class))).willReturn(any(Library.class));
         mockMvc.perform(get("/library/57b5622c-81c3-49a2-935a-1b73c200da30")).andExpect(status().isOk());
     }
 
@@ -83,8 +88,10 @@ class LibraryControllerTest {
     void should_return_ok_when_select_library() throws Exception {
         int page = 1;
         int size = 10;
-        var library = new LibraryRequestBody();
-        given(libraryController.selectEntities(library, page, size)).willReturn(ResponseEntity.ok().build());
+        var library = new Library("");
+        List<Library> libraries = new ArrayList<>();
+        PageImpl<Library> result = new PageImpl<>(libraries);
+        given(service.selectEntities(library, page, size)).willReturn(result);
         byte[] requestBody = new ClassPathResource("/request/library/select_entities.json").getInputStream().readAllBytes();
         mockMvc.perform(get("/library?page=" + page + "&size=" + size)
                 .contentType(APPLICATION_JSON)

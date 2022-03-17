@@ -21,6 +21,10 @@ public class Library extends Base {
         super();
     }
 
+    public Library(String id) {
+        super.setId(id);
+    }
+
     public Library(String libraryName, String libraryParentId, String libraryOwnerId,
                    Timestamp createDate, Timestamp updateDate) {
         super(createDate, updateDate);
