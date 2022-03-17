@@ -24,10 +24,10 @@ public class BaseSpecs<T extends Base> {
             predicates.add(builder.equal(root.get("id"), criteria.getId()));
         }
         if (criteria.getCreateDate() != null) {
-            predicates.add(builder.equal(root.get("createDate"), criteria.getCreateDate()));
+            predicates.add(builder.greaterThanOrEqualTo(root.get("createDate"), criteria.getCreateDate()));
         }
         if (criteria.getUpdateDate() != null) {
-            predicates.add(builder.equal(root.get("updateDate"), criteria.getUpdateDate()));
+            predicates.add(builder.greaterThanOrEqualTo(root.get("updateDate"), criteria.getUpdateDate()));
         }
         return predicates;
     }

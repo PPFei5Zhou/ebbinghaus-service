@@ -1,5 +1,7 @@
 package com.easy.ebbinghausservice.model.entity;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.Entity;
 import java.sql.Timestamp;
 
@@ -9,13 +11,14 @@ import java.sql.Timestamp;
  * @author Easy
  */
 @Entity
+@Proxy(lazy = false)
 public class LibraryCard extends Base {
     private String cardTitle;
     private String cardSubtitle;
     private String cardContent;
     private String libraryId;
 
-    protected LibraryCard() {
+    public LibraryCard() {
         super();
     }
 

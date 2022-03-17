@@ -7,6 +7,7 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -25,6 +26,9 @@ public abstract class AbstractService<B extends Base, J extends JpaRepository<B,
         if (model == null) {
             throw new NullPointerException();
         }
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        model.setCreateDate(now);
+        model.setUpdateDate(now);
         return jpa.save(model);
     }
 
@@ -35,6 +39,8 @@ public abstract class AbstractService<B extends Base, J extends JpaRepository<B,
         }
         Optional<B> optional = jpa.findById(model.getId());
         if (optional.isPresent()) {
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            model.setUpdateDate(now);
             JpaUtil.copyNotNullProperties(model, optional.get());
             return jpa.saveAndFlush(optional.get());
         }
