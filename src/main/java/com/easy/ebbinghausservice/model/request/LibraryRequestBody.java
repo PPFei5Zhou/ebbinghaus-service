@@ -11,12 +11,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public class LibraryRequestBody extends BaseRequestBody {
     private String libraryName;
+    private String libraryDescription;
     private String libraryParentId;
     private String libraryOwnerId;
 
     public Library createEntity() {
-        Library library = new Library(this.getLibraryName(), this.getLibraryParentId(), this.getLibraryOwnerId(),
-                super.getCreateDate(), super.getUpdateDate());
+        Library library = new Library(this.getLibraryName(), this.getLibraryDescription(),
+                this.getLibraryParentId(), this.getLibraryOwnerId(), super.getCreateDate(), super.getUpdateDate());
         library.setId(this.getId());
         return library;
     }
@@ -50,6 +51,14 @@ public class LibraryRequestBody extends BaseRequestBody {
 
     public void setLibraryName(String libraryName) {
         this.libraryName = libraryName;
+    }
+
+    public String getLibraryDescription() {
+        return libraryDescription;
+    }
+
+    public void setLibraryDescription(String libraryDescription) {
+        this.libraryDescription = libraryDescription;
     }
 
     public String getLibraryParentId() {

@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 @Proxy(lazy = false)
 public class Library extends Base {
     private String libraryName;
+    private String libraryDescription;
     private String libraryParentId;
     private String libraryOwnerId;
 
@@ -25,10 +26,11 @@ public class Library extends Base {
         super.setId(id);
     }
 
-    public Library(String libraryName, String libraryParentId, String libraryOwnerId,
+    public Library(String libraryName, String libraryDescription, String libraryParentId, String libraryOwnerId,
                    Timestamp createDate, Timestamp updateDate) {
         super(createDate, updateDate);
         this.libraryName = libraryName;
+        this.libraryDescription = libraryDescription;
         this.libraryParentId = libraryParentId;
         this.libraryOwnerId = libraryOwnerId;
     }
@@ -46,6 +48,14 @@ public class Library extends Base {
 
     public void setLibraryName(String libraryName) {
         this.libraryName = libraryName;
+    }
+
+    public String getLibraryDescription() {
+        return libraryDescription;
+    }
+
+    public void setLibraryDescription(String libraryDescription) {
+        this.libraryDescription = libraryDescription;
     }
 
     public String getLibraryParentId() {

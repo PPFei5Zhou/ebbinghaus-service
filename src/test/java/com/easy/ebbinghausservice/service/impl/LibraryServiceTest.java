@@ -45,7 +45,7 @@ class LibraryServiceTest {
     @Test
     void service_should_insert_entity() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        Library library = new Library("算查表子", "", "8eB7bF4C-4f1e-aBeD-cAd1-AEbA138a1Cf4", now, now);
+        Library library = new Library("算查表子", "", "", "8eB7bF4C-4f1e-aBeD-cAd1-AEbA138a1Cf4", now, now);
         Library inserted = libraryService.insertEntity(library);
         assertThat(inserted.getId(), is(notNullValue()));
         assertThat(inserted.getLibraryName(), equalTo(library.getLibraryName()));

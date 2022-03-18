@@ -21,7 +21,7 @@ class LibraryRepositoryTest {
     @Test
     void repository_should_save_library() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        Library library = new Library("test library name", "", "", now, now);
+        Library library = new Library("test library name", "test library description", "", "", now, now);
         Library savedLibrary = repository.saveAndFlush(library);
         assertThat(savedLibrary.getId(), is(notNullValue()));
         assertThat(savedLibrary.getLibraryName(), equalTo(library.getLibraryName()));
