@@ -1,5 +1,6 @@
 package com.easy.ebbinghausservice.controller;
 
+import com.easy.ebbinghausservice.controller.api.LibraryCardController;
 import com.easy.ebbinghausservice.model.entity.LibraryCard;
 import com.easy.ebbinghausservice.service.LibraryCardService;
 import org.junit.jupiter.api.MethodOrderer;
@@ -42,7 +43,7 @@ class LibraryCardControllerTest {
         given(service.insertEntity(any(LibraryCard.class))).willReturn(any(LibraryCard.class));
         byte[] bytes = new ClassPathResource("/request/libraryCard/insert_entity.json").getInputStream().readAllBytes();
         mockMvc
-                .perform(post("/libraryCard")
+                .perform(post("/api/libraryCard")
                         .contentType(APPLICATION_JSON)
                         .content(bytes))
                 .andExpect(status().isOk());
@@ -54,7 +55,7 @@ class LibraryCardControllerTest {
         given(service.updateEntity(any(LibraryCard.class))).willReturn(any(LibraryCard.class));
         byte[] bytes = new ClassPathResource("/request/libraryCard/update_entity.json").getInputStream().readAllBytes();
         mockMvc
-                .perform(put("/libraryCard/c1fE377B-6F39-fe26-CeeD-8FBCc0D28CC7")
+                .perform(put("/api/libraryCard/c1fE377B-6F39-fe26-CeeD-8FBCc0D28CC7")
                         .contentType(APPLICATION_JSON)
                         .content(bytes))
                 .andExpect(status().isOk());
@@ -65,7 +66,7 @@ class LibraryCardControllerTest {
     void request_should_return_ok_when_request_delete_entity() throws Exception {
         doNothing().when(service).removeEntity(any(String.class));
         mockMvc
-                .perform(delete("/libraryCard/dD8BBBd3-43Cb-CAD2-Ff4F-ce5d9aA363E3"))
+                .perform(delete("/api/libraryCard/dD8BBBd3-43Cb-CAD2-Ff4F-ce5d9aA363E3"))
                 .andExpect(status().isOk());
     }
 
@@ -75,7 +76,7 @@ class LibraryCardControllerTest {
         doNothing().when(service).removeEntity(any(String[].class));
         byte[] bytes = new ClassPathResource("/request/libraryCard/remove_entities.json").getInputStream().readAllBytes();
         mockMvc
-                .perform(delete("/libraryCard")
+                .perform(delete("/api/libraryCard")
                         .contentType(APPLICATION_JSON)
                         .content(bytes))
                 .andExpect(status().isOk());
@@ -86,7 +87,7 @@ class LibraryCardControllerTest {
     void request_should_return_ok_when_request_select_entity() throws Exception {
         given(service.selectEntityById(any(String.class))).willReturn(any(LibraryCard.class));
         mockMvc
-                .perform(get("/libraryCard/B2e054DD-73F3-fC2D-A7df-CAEB39d3ecf0"))
+                .perform(get("/api/libraryCard/B2e054DD-73F3-fC2D-A7df-CAEB39d3ecf0"))
                 .andExpect(status().isOk());
     }
 
@@ -101,7 +102,7 @@ class LibraryCardControllerTest {
         byte[] bytes = new ClassPathResource("/request/libraryCard/select_entities.json").getInputStream().readAllBytes();
         given(service.selectEntities(libraryCard, page, size)).willReturn(result);
         mockMvc
-                .perform(get("/libraryCard?page=" + page + "&size=" + size)
+                .perform(get("/api/libraryCard?page=" + page + "&size=" + size)
                         .contentType(APPLICATION_JSON)
                         .content(bytes))
                 .andExpect(status().isOk());

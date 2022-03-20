@@ -1,8 +1,6 @@
 package com.easy.ebbinghausservice.model.request;
 
 import com.easy.ebbinghausservice.model.entity.Library;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Library request body model.
@@ -14,35 +12,14 @@ public class LibraryRequestBody extends BaseRequestBody {
     private String libraryDescription;
     private String libraryParentId;
     private String libraryOwnerId;
+    private int page;
+    private int size;
 
     public Library createEntity() {
         Library library = new Library(this.getLibraryName(), this.getLibraryDescription(),
                 this.getLibraryParentId(), this.getLibraryOwnerId(), super.getCreateDate(), super.getUpdateDate());
         library.setId(this.getId());
         return library;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (!(o instanceof LibraryRequestBody)) {
-            return false;
-        }
-
-        LibraryRequestBody that = (LibraryRequestBody) o;
-
-        return new EqualsBuilder().appendSuper(super.equals(o)).append(getLibraryName(),
-                that.getLibraryName()).append(getLibraryParentId(),
-                that.getLibraryParentId()).append(getLibraryOwnerId(), that.getLibraryOwnerId()).isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).appendSuper(super.hashCode()).append(getLibraryName())
-                .append(getLibraryParentId()).append(getLibraryOwnerId()).toHashCode();
     }
 
     public String getLibraryName() {
@@ -75,5 +52,21 @@ public class LibraryRequestBody extends BaseRequestBody {
 
     public void setLibraryOwnerId(String libraryOwnerId) {
         this.libraryOwnerId = libraryOwnerId;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

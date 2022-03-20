@@ -1,4 +1,4 @@
-package com.easy.ebbinghausservice.controller;
+package com.easy.ebbinghausservice.controller.api;
 
 import com.easy.ebbinghausservice.model.entity.LibraryCard;
 import com.easy.ebbinghausservice.model.request.LibraryCardRequestBody;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Easy
  */
 @RestController
-@RequestMapping("libraryCard")
+@RequestMapping("api/libraryCard")
 public class LibraryCardController {
 
     private final LibraryCardService service;

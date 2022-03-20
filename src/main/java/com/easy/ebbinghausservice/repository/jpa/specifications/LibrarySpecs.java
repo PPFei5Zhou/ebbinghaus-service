@@ -18,7 +18,7 @@ public class LibrarySpecs {
             BaseSpecs<Library> baseSpecs = new BaseSpecs<>();
             List<Predicate> predicates = baseSpecs.basePredicates(root, builder, criteria);
             if (Strings.isNotBlank(criteria.getLibraryName())) {
-                predicates.add(builder.equal(root.get("libraryName"), criteria.getLibraryName()));
+                predicates.add(builder.like(root.get("libraryName"), "%" + criteria.getLibraryName() + "%"));
             }
             if (Strings.isNotBlank(criteria.getLibraryParentId())) {
                 predicates.add(builder.equal(root.get("libraryParentId"), criteria.getLibraryParentId()));

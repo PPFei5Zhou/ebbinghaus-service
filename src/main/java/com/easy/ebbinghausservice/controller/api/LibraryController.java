@@ -1,9 +1,11 @@
-package com.easy.ebbinghausservice.controller;
+package com.easy.ebbinghausservice.controller.api;
 
 import com.easy.ebbinghausservice.model.entity.Library;
 import com.easy.ebbinghausservice.model.request.LibraryRequestBody;
+import com.easy.ebbinghausservice.model.response.Paginate;
 import com.easy.ebbinghausservice.service.LibraryService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,7 @@ import javax.annotation.Resource;
  * @author Easy
  */
 @RestController
-@RequestMapping("library")
+@RequestMapping("api/library")
 public class LibraryController {
     @Resource
     public LibraryService service;
@@ -56,9 +58,25 @@ public class LibraryController {
 
     /** 分页查询实体. */
     @GetMapping
-    public ResponseEntity<Page<Library>> selectEntities(@RequestBody LibraryRequestBody requestBody, int page, int size) {
-        Page<Library> libraryPage = service.selectEntities(requestBody.createEntity(), page, size);
-        return ResponseEntity.ok(libraryPage);
+    public ResponseEntity<Paginate<Library>> selectEntities(LibraryRequestBody requestBody) {
+        Page<Library> libraryPage = service
+                .selectEntities(
+                        requestBody.createEntity(),
+                        requestBody.getPage(),
+                        requestBody.getSize());
+
+        if (libraryPage == null) {
+            return ResponseEntity.ok(Paginate.build(1, 10, 0, null));
+        }
+
+        Pageable pageable = libraryPage.getPageable();
+        return ResponseEntity.ok(Paginate.build(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+
+                libraryPage.getTotalElements(),
+                libraryPage.getContent()
+        ));
     }
 
     /** 查询指定的实体. */
