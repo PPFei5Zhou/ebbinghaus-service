@@ -1,7 +1,7 @@
 FROM openjdk:11.0.14-jre-bullseye
 EXPOSE 8080
 
-ARG DEPENDENCY=target/dependency
+ARG DEPENDENCY=build/libs
 COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY ${DEPENDENCY}/META-INF /app/META-INF
 COPY ${DEPENDENCY}/BOOT-INF/classes /app
