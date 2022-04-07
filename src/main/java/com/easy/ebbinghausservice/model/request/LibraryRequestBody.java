@@ -1,6 +1,7 @@
 package com.easy.ebbinghausservice.model.request;
 
 import com.easy.ebbinghausservice.model.entity.Library;
+import com.easy.ebbinghausservice.model.enums.JpaEntityType;
 
 /**
  * Library request body model.
@@ -13,11 +14,16 @@ public class LibraryRequestBody extends BaseRequestBody {
     private String libraryParentId;
     private String libraryOwnerId;
 
-    public Library createEntity() {
-        Library library = new Library(this.getLibraryName(), this.getLibraryDescription(),
-                this.getLibraryParentId(), this.getLibraryOwnerId(), super.getCreateDate(), super.getUpdateDate());
-        library.setId(this.getId());
-        return library;
+    public Library createEntity(JpaEntityType type) {
+        switch (type) {
+            case INSERT:
+                return Library.ofCreate(libraryName, libraryDescription, libraryParentId, libraryOwnerId);
+            case UPDATE:
+                return Library.ofUpdate(super.getId(), libraryName, libraryDescription, libraryParentId, libraryOwnerId);
+            default:
+                return Library.sqlCondition(super.getId(), libraryName, libraryDescription, libraryParentId,
+                        libraryOwnerId, super.getCreateDate(), super.getUpdateDate());
+        }
     }
 
     public String getLibraryName() {

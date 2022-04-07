@@ -21,13 +21,11 @@ public class Knowledge extends Base {
     private String libraryId;
 
     public static Knowledge ofCreated(String title, String subtitle, String content, String libraryId) {
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new Knowledge(null, title, subtitle, content, libraryId, now, null);
+        return new Knowledge(null, title, subtitle, content, libraryId, null, null);
     }
 
     public static Knowledge ofUpdate(String id, String title, String subtitle, String content, String libraryId) {
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new Knowledge(id, title, subtitle, content, libraryId, null, now);
+        return new Knowledge(id, title, subtitle, content, libraryId, null, null);
     }
 
     public static Knowledge sqlCondition(String id, String title, String subtitle, String content, String libraryId) {

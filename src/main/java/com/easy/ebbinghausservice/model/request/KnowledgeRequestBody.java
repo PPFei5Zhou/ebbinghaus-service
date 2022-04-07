@@ -1,6 +1,7 @@
 package com.easy.ebbinghausservice.model.request;
 
 import com.easy.ebbinghausservice.model.entity.Knowledge;
+import com.easy.ebbinghausservice.model.enums.JpaEntityType;
 
 /**
  * Knowledge request body.
@@ -21,15 +22,6 @@ public class KnowledgeRequestBody extends BaseRequestBody {
         } else {
             return Knowledge.sqlCondition(super.getId(), this.title, this.subtitle, this.content, this.libraryId);
         }
-    }
-
-    public enum JpaEntityType {
-        /** 插入. */
-        INSERT,
-        /** 更新. */
-        UPDATE,
-        /** 查询. */
-        SEARCH
     }
 
     public String getTitle() {

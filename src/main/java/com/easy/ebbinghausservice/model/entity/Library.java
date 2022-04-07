@@ -37,29 +37,28 @@ public class Library extends Base {
         super();
     }
 
-    public Library(String id) {
-        super.setId(id);
-    }
-
-    public Library(String libraryName, String libraryDescription, String libraryParentId, String libraryOwnerId,
+    private Library(String id, String libraryName, String libraryDescription, String libraryParentId, String libraryOwnerId,
                    Timestamp createDate, Timestamp updateDate) {
-        super(createDate, updateDate);
+        super(id, createDate, updateDate);
         this.libraryName = libraryName;
         this.libraryDescription = libraryDescription;
         this.libraryParentId = libraryParentId;
         this.libraryOwnerId = libraryOwnerId;
     }
 
-    public Library(String id, String libraryName, String libraryParentId, String libraryOwnerId) {
-        super(id);
-        this.libraryName = libraryName;
-        this.libraryParentId = libraryParentId;
-        this.libraryOwnerId = libraryOwnerId;
+    public static Library ofCreate(String libraryName, String libraryDescription, String libraryParentId,
+                                   String libraryOwnerId) {
+        return new Library(null, libraryName, libraryDescription, libraryParentId, libraryOwnerId, null, null);
     }
 
-    public static Library ofCreate(String libraryName, String libraryDescription, String libraryParentId, String libraryOwnerId) {
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        return new Library(libraryName, libraryDescription, libraryParentId, libraryOwnerId, now, null);
+    public static Library ofUpdate(String id, String libraryName, String libraryDescription, String libraryParentId,
+                                   String libraryOwnerId) {
+        return new Library(id, libraryName, libraryDescription, libraryParentId, libraryOwnerId, null, null);
+    }
+
+    public static Library sqlCondition(String id, String libraryName, String libraryDescription, String libraryParentId,
+                                       String libraryOwnerId, Timestamp createDate, Timestamp updateDate) {
+        return new Library(id, libraryName, libraryDescription, libraryParentId, libraryOwnerId, createDate, updateDate);
     }
 
     public String getLibraryName() {

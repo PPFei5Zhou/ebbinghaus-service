@@ -1,6 +1,5 @@
 package com.easy.ebbinghausservice.controller.api;
 
-import com.easy.ebbinghausservice.controller.api.LibraryController;
 import com.easy.ebbinghausservice.model.entity.Library;
 import com.easy.ebbinghausservice.service.LibraryService;
 import org.junit.jupiter.api.MethodOrderer;
@@ -91,7 +90,7 @@ class LibraryControllerTest {
     void should_return_ok_when_select_library() throws Exception {
         int page = 1;
         int size = 10;
-        var library = new Library("");
+        var library = Library.sqlCondition(null, null, null, null, null, null, null);
         List<Library> libraries = new ArrayList<>();
         libraries.add(library);
         Pageable pageable = PageRequest.of(1, 10);

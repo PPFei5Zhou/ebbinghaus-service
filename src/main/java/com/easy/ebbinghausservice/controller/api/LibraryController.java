@@ -1,6 +1,7 @@
 package com.easy.ebbinghausservice.controller.api;
 
 import com.easy.ebbinghausservice.model.entity.Library;
+import com.easy.ebbinghausservice.model.enums.JpaEntityType;
 import com.easy.ebbinghausservice.model.request.LibraryRequestBody;
 import com.easy.ebbinghausservice.model.response.Paginate;
 import com.easy.ebbinghausservice.service.LibraryService;
@@ -32,14 +33,14 @@ public class LibraryController {
     /** 新增实体. */
     @PostMapping()
     public ResponseEntity<Library> insertEntity(@RequestBody LibraryRequestBody requestBody) {
-        return ResponseEntity.ok(service.insertEntity(requestBody.createEntity()));
+        return ResponseEntity.ok(service.insertEntity(requestBody.createEntity(JpaEntityType.INSERT)));
     }
 
     /** 更新实体. */
     @PutMapping("{id}")
     public ResponseEntity<Library> updateEntity(@PathVariable String id, @RequestBody LibraryRequestBody requestBody) {
         requestBody.setId(id);
-        return ResponseEntity.ok(service.updateEntity(requestBody.createEntity()));
+        return ResponseEntity.ok(service.updateEntity(requestBody.createEntity(JpaEntityType.UPDATE)));
     }
 
     /** 删除实体. */
@@ -61,7 +62,7 @@ public class LibraryController {
     public ResponseEntity<Paginate<Library>> selectEntities(LibraryRequestBody requestBody) {
         Page<Library> libraryPage = service
                 .selectEntities(
-                        requestBody.createEntity(),
+                        requestBody.createEntity(JpaEntityType.SEARCH),
                         requestBody.getPage(),
                         requestBody.getSize());
 

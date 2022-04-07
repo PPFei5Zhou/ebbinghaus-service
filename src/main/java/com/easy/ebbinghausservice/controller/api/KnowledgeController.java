@@ -1,8 +1,8 @@
 package com.easy.ebbinghausservice.controller.api;
 
 import com.easy.ebbinghausservice.model.entity.Knowledge;
+import com.easy.ebbinghausservice.model.enums.JpaEntityType;
 import com.easy.ebbinghausservice.model.request.KnowledgeRequestBody;
-import com.easy.ebbinghausservice.model.request.KnowledgeRequestBody.JpaEntityType;
 import com.easy.ebbinghausservice.model.response.Paginate;
 import com.easy.ebbinghausservice.service.KnowledgeService;
 import org.springframework.data.domain.Page;

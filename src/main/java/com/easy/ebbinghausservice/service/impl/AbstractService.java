@@ -7,6 +7,8 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Optional;
@@ -19,7 +21,10 @@ import java.util.Optional;
 public abstract class AbstractService<B extends Base, J extends JpaRepository<B, String>> implements BaseService<B> {
     @Autowired
     @SuppressWarnings("all")
-    public J jpa;
+    protected J jpa;
+
+    @Resource
+    private EntityManager manager;
 
     @Override
     public B insertEntity(B model) {
@@ -29,7 +34,7 @@ public abstract class AbstractService<B extends Base, J extends JpaRepository<B,
         Timestamp now = new Timestamp(System.currentTimeMillis());
         model.setCreateDate(now);
         model.setUpdateDate(now);
-        return jpa.save(model);
+        return saveEntity(model);
     }
 
     @Override
@@ -42,7 +47,7 @@ public abstract class AbstractService<B extends Base, J extends JpaRepository<B,
             Timestamp now = new Timestamp(System.currentTimeMillis());
             model.setUpdateDate(now);
             JpaUtil.copyNotNullProperties(model, optional.get());
-            return jpa.saveAndFlush(optional.get());
+            return saveEntity(optional.get());
         }
         throw new NullPointerException();
     }
@@ -71,5 +76,11 @@ public abstract class AbstractService<B extends Base, J extends JpaRepository<B,
             throw new RuntimeException();
         }
         return jpa.findById(id).orElseThrow();
+    }
+
+    private B saveEntity(B model) {
+        var entity = jpa.saveAndFlush(model);
+        manager.detach(entity);
+        return entity;
     }
 }

@@ -43,6 +43,14 @@ class LibraryRepositoryTest {
         assertSameLibrary(update, updated);
     }
 
+    @Test
+    void repository_should_delete_library() {
+        Library saved = repository.saveAndFlush(library);
+        entityManager.detach(saved);
+        repository.deleteById(saved.getId());
+        assertThat(repository.findById(saved.getId()).isEmpty(), is(true));
+    }
+
     void assertSameLibrary(Library expected, Library actual) {
         assertThat(expected.getId(), equalTo(actual.getId()));
         assertThat(expected.getLibraryName(), equalTo(actual.getLibraryName()));
