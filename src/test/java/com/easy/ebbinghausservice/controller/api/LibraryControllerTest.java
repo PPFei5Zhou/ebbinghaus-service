@@ -1,4 +1,4 @@
-package com.easy.ebbinghausservice.controller;
+package com.easy.ebbinghausservice.controller.api;
 
 import com.easy.ebbinghausservice.controller.api.LibraryController;
 import com.easy.ebbinghausservice.model.entity.Library;

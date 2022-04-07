@@ -12,8 +12,6 @@ public class LibraryRequestBody extends BaseRequestBody {
     private String libraryDescription;
     private String libraryParentId;
     private String libraryOwnerId;
-    private int page;
-    private int size;
 
     public Library createEntity() {
         Library library = new Library(this.getLibraryName(), this.getLibraryDescription(),
@@ -52,21 +50,5 @@ public class LibraryRequestBody extends BaseRequestBody {
 
     public void setLibraryOwnerId(String libraryOwnerId) {
         this.libraryOwnerId = libraryOwnerId;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 }

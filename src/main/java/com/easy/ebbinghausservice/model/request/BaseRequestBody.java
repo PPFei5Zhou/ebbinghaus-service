@@ -11,7 +11,8 @@ import java.sql.Timestamp;
  */
 public class BaseRequestBody {
     private String id;
-
+    private int page;
+    private int size;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Timestamp createDate;
 
@@ -40,5 +41,21 @@ public class BaseRequestBody {
 
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 }

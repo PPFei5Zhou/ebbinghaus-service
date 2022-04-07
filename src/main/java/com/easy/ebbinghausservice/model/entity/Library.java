@@ -1,6 +1,6 @@
 package com.easy.ebbinghausservice.model.entity;
 
-import org.hibernate.annotations.Proxy;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import javax.persistence.Entity;
 import java.sql.Timestamp;
@@ -11,13 +11,13 @@ import java.sql.Timestamp;
  * @author Easy
  */
 @Entity
-@Proxy(lazy = false)
 public class Library extends Base {
     private String libraryName;
     private String libraryDescription;
     private String libraryParentId;
     private String libraryOwnerId;
 
+    @PersistenceConstructor
     protected Library() {
         super();
     }

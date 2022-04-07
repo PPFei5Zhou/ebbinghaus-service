@@ -70,6 +70,6 @@ public abstract class AbstractService<B extends Base, J extends JpaRepository<B,
         if (Strings.isBlank(id)) {
             throw new RuntimeException();
         }
-        return jpa.getById(id);
+        return jpa.findById(id).orElseThrow();
     }
 }

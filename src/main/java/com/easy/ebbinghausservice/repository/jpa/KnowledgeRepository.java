@@ -1,13 +1,13 @@
 package com.easy.ebbinghausservice.repository.jpa;
 
-import com.easy.ebbinghausservice.model.entity.LibraryCard;
+import com.easy.ebbinghausservice.model.entity.Knowledge;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 /**
- * Library card jpa repository.
+ * Knowledge Repository.
  *
  * @author Easy
  */
-public interface LibraryCardRepository extends JpaRepository<LibraryCard, String>, JpaSpecificationExecutor<LibraryCard> {
+public interface KnowledgeRepository extends JpaRepository<Knowledge, String>, JpaSpecificationExecutor<Knowledge> {
 }
