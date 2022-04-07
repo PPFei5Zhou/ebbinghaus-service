@@ -5,7 +5,7 @@ import com.easy.ebbinghausservice.model.entity.Library;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Timestamp;
+import javax.persistence.EntityManager;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -14,16 +14,40 @@ import static org.hamcrest.Matchers.equalTo;
 
 @JpaRepositoryTest
 class LibraryRepositoryTest {
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     private LibraryRepository repository;
 
+    private final Library library =
+            Library.ofCreate("test library name", "test library description", "test library parent id", "test library owner id");
+
     @Test
     void repository_should_save_library() {
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-        Library library = new Library("test library name", "test library description", "", "", now, now);
         Library savedLibrary = repository.saveAndFlush(library);
         assertThat(savedLibrary.getId(), is(notNullValue()));
-        assertThat(savedLibrary.getLibraryName(), equalTo(library.getLibraryName()));
+        assertSameLibrary(library, savedLibrary);
+    }
+
+    @Test
+    void repository_should_update_library() {
+        Library saved = repository.saveAndFlush(library);
+        entityManager.detach(saved);
+        Library update = repository.findById(saved.getId()).orElseThrow(AssertionError::new);
+        update.setLibraryName("update name");
+        update.setLibraryDescription("update description");
+        update.setLibraryParentId("update parent id");
+        update.setLibraryOwnerId("update owner id");
+        Library updated = repository.saveAndFlush(update);
+        assertSameLibrary(update, updated);
+    }
+
+    void assertSameLibrary(Library expected, Library actual) {
+        assertThat(expected.getId(), equalTo(actual.getId()));
+        assertThat(expected.getLibraryName(), equalTo(actual.getLibraryName()));
+        assertThat(expected.getLibraryDescription(), equalTo(actual.getLibraryDescription()));
+        assertThat(expected.getLibraryParentId(), equalTo(actual.getLibraryParentId()));
+        assertThat(expected.getLibraryOwnerId(), equalTo(actual.getLibraryOwnerId()));
     }
 }

@@ -70,8 +70,8 @@ class LibraryServiceTest {
     @Order(4)
     @Test
     void service_should_select_entities() {
-        Library library = new Library("", "", "1c8fa5a2-a843-409a-a0d8-5c54784eb774", "c53bA5B3-f286-2eBf-8A7E-2B7E7Aff1b2A");
-        Page<Library> libraries = libraryService.selectEntities(library, 1, 10);
+        Library library = new Library("", "", "", "c53bA5B3-f286-2eBf-8A7E-2B7E7Aff1b2A");
+        Page<Library> libraries = libraryService.selectEntities(library, 1, Integer.MAX_VALUE);
         assertThat(libraries.getTotalElements(), is(notNullValue()));
     }
 

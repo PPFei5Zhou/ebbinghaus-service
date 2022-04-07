@@ -2,8 +2,10 @@ package com.easy.ebbinghausservice.model.entity;
 
 import org.springframework.data.annotation.PersistenceConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * Knowledge.
@@ -15,6 +17,7 @@ public class Knowledge extends Base {
     private String title;
     private String subtitle;
     private String content;
+    @Column(name = "library_id")
     private String libraryId;
 
     public static Knowledge ofCreated(String title, String subtitle, String content, String libraryId) {
@@ -74,5 +77,25 @@ public class Knowledge extends Base {
 
     public void setLibraryId(String libraryId) {
         this.libraryId = libraryId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Knowledge)) {
+            return false;
+        }
+        Knowledge knowledge = (Knowledge) o;
+        return Objects.equals(getTitle(), knowledge.getTitle())
+                && Objects.equals(getSubtitle(), knowledge.getSubtitle())
+                && Objects.equals(getContent(), knowledge.getContent())
+                && Objects.equals(getLibraryId(), knowledge.getLibraryId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getSubtitle(), getContent(), getLibraryId());
     }
 }
