@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedAttributeNode;
 import javax.persistence.OneToMany;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -17,6 +19,10 @@ import java.util.Set;
  * @author Easy
  */
 @Entity
+@NamedEntityGraph(name = "Library.Graph", attributeNodes = {
+    @NamedAttributeNode(value = "knowledgeSet"),
+    @NamedAttributeNode(value = "libraries")
+})
 public class Library extends Base {
     private String libraryName;
     private String libraryDescription;
@@ -24,11 +30,11 @@ public class Library extends Base {
     private String libraryParentId;
     private String libraryOwnerId;
 
-    @OneToMany(targetEntity = Knowledge.class, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Knowledge.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "library_id")
     private Set<Knowledge> knowledgeSet;
 
-    @OneToMany(targetEntity = Library.class, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Library.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "library_parent_id")
     private Set<Library> libraries;
 
