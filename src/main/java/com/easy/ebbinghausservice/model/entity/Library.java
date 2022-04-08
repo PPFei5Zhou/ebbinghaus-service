@@ -134,4 +134,16 @@ public class Library extends Base {
     public int hashCode() {
         return Objects.hash(getLibraryName(), getLibraryDescription(), getLibraryParentId(), getLibraryOwnerId());
     }
+
+    @Override
+    public String toString() {
+        return "Library{"
+                + "libraryName='" + libraryName + '\''
+                + ", libraryDescription='" + libraryDescription + '\''
+                + ", libraryParentId='" + libraryParentId + '\''
+                + ", libraryOwnerId='" + libraryOwnerId + '\''
+                + ", knowledgeSet=" + knowledgeSet
+                + ", libraries=" + libraries
+                + "} " + super.toString();
+    }
 }

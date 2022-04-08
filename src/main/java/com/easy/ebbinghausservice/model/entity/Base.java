@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * Base jpa entity.
@@ -29,17 +30,8 @@ public class Base {
     public Base() {
     }
 
-    public Base(String id) {
-        this.id = id;
-    }
-
     public Base(String id, Timestamp createDate, Timestamp updateDate) {
         this.id = id;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-    }
-
-    public Base(Timestamp createDate, Timestamp updateDate) {
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
@@ -66,5 +58,33 @@ public class Base {
 
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Base)) {
+            return false;
+        }
+        Base base = (Base) o;
+        return Objects.equals(getId(), base.getId())
+                && Objects.equals(getCreateDate(), base.getCreateDate())
+                && Objects.equals(getUpdateDate(), base.getUpdateDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCreateDate(), getUpdateDate());
+    }
+
+    @Override
+    public String toString() {
+        return "Base{"
+                + "id='" + id + '\''
+                + ", createDate=" + createDate
+                + ", updateDate=" + updateDate
+                + '}';
     }
 }

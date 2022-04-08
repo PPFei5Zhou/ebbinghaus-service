@@ -2,13 +2,18 @@ package com.easy.ebbinghausservice.repository.jpa;
 
 import com.easy.ebbinghausservice.core.JpaRepositoryTest;
 import com.easy.ebbinghausservice.model.entity.Library;
+import com.easy.ebbinghausservice.repository.jpa.specifications.LibrarySpecs;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.EntityManager;
 
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -49,6 +54,13 @@ class LibraryRepositoryTest {
         entityManager.detach(saved);
         repository.deleteById(saved.getId());
         assertThat(repository.findById(saved.getId()).isEmpty(), is(true));
+    }
+
+    @Test
+    void repository_should_select_library() {
+        Specification<Library> specs = LibrarySpecs.selectEntities(Library.sqlCondition("", "", "", "", "", null, null));
+        List<Library> list = repository.findAll(specs);
+        assertThat(list.size(), is(not(0)));
     }
 
     void assertSameLibrary(Library expected, Library actual) {
